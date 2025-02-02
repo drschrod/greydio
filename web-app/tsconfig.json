@@ -11,11 +11,11 @@
   "esModuleInterop": true,
   "allowSyntheticDefaultImports": true,
   "moduleResolution": "node",
-  "strict": true,
   "compilerOptions": {
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strict": true
   }
 }
