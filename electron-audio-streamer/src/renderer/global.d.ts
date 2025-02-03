@@ -3,7 +3,8 @@ export {};
 declare global {
   interface Window {
     electronAPI: {
-      startStreaming: () => void;
+      enumerateDevices: () => Promise<MediaDeviceInfo[]>;
+      getMicStream: (deviceId: string) => Promise<MediaStream>;
     };
   }
 }
