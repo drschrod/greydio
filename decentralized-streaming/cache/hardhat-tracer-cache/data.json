@@ -1,0 +1,30 @@
+{
+  "tokenDecimals": [],
+  "contractNames": [
+    [
+      "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "unknown"
+    ],
+    [
+      "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
+      "unknown"
+    ],
+    [
+      "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9",
+      "unknown"
+    ],
+    [
+      "0x5fc8d32690cc91d4c39d9d3abcbd16989f875707",
+      "unknown"
+    ],
+    [
+      "0xa513e6e4b8f2a923d98304ec87f64353c4d5c853",
+      "unknown"
+    ],
+    [
+      "0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6",
+      "unknown"
+    ]
+  ],
+  "fourByteDir": []
+}

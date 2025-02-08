@@ -1,0 +1,6 @@
+(await ethers.provider.getBalance("0x22983D3Daa4494109a1Fe33407de7fB440A603b9")).toString();
+});
+    value: ethers.parseEther("100")      // Sends 100 ETH
+    to: "0x22983D3Daa4494109a1Fe33407de7fB440A603b9",  // Replace with your actual wallet address
+await owner.sendTransaction({
+const [owner] = await ethers.getSigners();
