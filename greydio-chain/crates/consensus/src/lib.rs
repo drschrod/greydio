@@ -1,9 +1,10 @@
 use anyhow::Result;
 use greydio_ledger::Ledger;
+use greydio_smt::SparseMerkle;
 use greydio_types::Tx;
+use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use tokio::sync::mpsc::Receiver;
-use greydio_smt::SparseMerkle;
 
 /// Narrow trait so we don’t expose all of Ledger here.
 pub trait LedgerLike {
@@ -22,10 +23,27 @@ impl<T: SparseMerkle> LedgerLike for Ledger<T> {
 pub struct SingleNodeConsensus<L> {
     pub ledger: Arc<Mutex<L>>,
     pub rx: Receiver<Tx>,
+    pub queue_len: Arc<AtomicUsize>,
+    pub last_block_ts: Arc<AtomicU64>,
+    pub block_count: Arc<AtomicU64>,
 }
 
 impl<L> SingleNodeConsensus<L> {
-    pub fn new(ledger: Arc<Mutex<L>>, rx: Receiver<Tx>) -> Self { Self { ledger, rx } }
+    pub fn new(
+        ledger: Arc<Mutex<L>>,
+        rx: Receiver<Tx>,
+        queue_len: Arc<AtomicUsize>,
+        last_block_ts: Arc<AtomicU64>,
+        block_count: Arc<AtomicU64>,
+    ) -> Self {
+        Self {
+            ledger,
+            rx,
+            queue_len,
+            last_block_ts,
+            block_count,
+        }
+    }
 }
 
 impl<L> SingleNodeConsensus<L>
@@ -39,13 +57,20 @@ where
             let mut txs = Vec::new();
             while let Ok(tx) = self.rx.try_recv() {
                 txs.push(tx);
-                if txs.len() >= 10_000 { break; } // crude cap
+                if txs.len() >= 10_000 {
+                    break;
+                } // crude cap
+            }
+            if !txs.is_empty() {
+                self.queue_len.fetch_sub(txs.len(), Ordering::Relaxed);
             }
             let now = SystemTime::now().duration_since(UNIX_EPOCH)?.as_millis() as u64;
             {
                 let mut lg = self.ledger.lock().unwrap();
                 lg.build(txs, now)?;
             }
+            self.last_block_ts.store(now, Ordering::Relaxed);
+            self.block_count.fetch_add(1, Ordering::Relaxed);
             tokio::time::sleep(std::time::Duration::from_millis(1000)).await;
         }
     }

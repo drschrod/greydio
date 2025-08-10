@@ -1,4 +1,3 @@
-use anyhow::Result;
 use ed25519_dalek::{Signer, Verifier};
 
 pub struct Keypair(ed25519_dalek::SigningKey);
@@ -24,4 +23,3 @@ pub fn verify(public: &[u8], msg: &[u8], sig: &[u8]) -> anyhow::Result<()> {
     vk.verify(msg, &sig)?;
     Ok(())
 }
-

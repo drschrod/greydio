@@ -13,3 +13,4 @@ tracing = { workspace = true }
 greydio-types = { path = "../types" }
 greydio-ledger = { path = "../ledger" }
 greydio-smt = { path = "../smt" }
+hex = { workspace = true }

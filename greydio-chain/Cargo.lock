@@ -563,6 +563,7 @@ dependencies = [
  "greydio-ledger",
  "greydio-smt",
  "greydio-types",
+ "hex",
  "serde",
  "serde_json",
  "tokio",
