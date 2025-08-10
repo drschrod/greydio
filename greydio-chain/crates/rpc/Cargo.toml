@@ -1,0 +1,15 @@
+[package]
+name = "greydio-rpc"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+axum = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+greydio-types = { path = "../types" }
+greydio-ledger = { path = "../ledger" }
+greydio-smt = { path = "../smt" }

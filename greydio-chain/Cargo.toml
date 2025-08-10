@@ -1,0 +1,35 @@
+[workspace]
+members = [
+  "crates/types",
+  "crates/crypto",
+  "crates/smt",
+  "crates/ledger",
+  "crates/contracts",
+  "crates/consensus",
+  "crates/p2p",
+  "crates/rpc",
+  "crates/node",
+  "crates/cli",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+
+[workspace.dependencies]
+anyhow = "1"
+thiserror = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+bincode = "1"
+rand = "0.8"
+blake3 = "1"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+tower = "0.5"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
+clap = { version = "4", features = ["derive"] }
+hex = "0.4"

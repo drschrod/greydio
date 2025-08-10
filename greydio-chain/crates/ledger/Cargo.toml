@@ -1,0 +1,14 @@
+[package]
+name = "greydio-ledger"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+greydio-types = { path = "../types" }
+greydio-crypto = { path = "../crypto" }
+greydio-smt = { path = "../smt" }
+greydio-contracts = { path = "../contracts" }
+bincode = { workspace = true }

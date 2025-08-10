@@ -1,0 +1,11 @@
+[package]
+name = "greydio-consensus"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+tokio = { workspace = true }
+greydio-ledger = { path = "../ledger" }
+greydio-types = { path = "../types" }
+greydio-smt = { path = "../smt" }
